@@ -18,10 +18,20 @@ async function recuseInvite(eventId: string, invitaionId: string, userId: string
   }));
 }
 
+async function getNotifications(userId: string){
+  return (await api.get(`/eventInvitations/${userId}/count`));
+}
+
+async function getInvites(userId: string){
+  return (await api.get(`/eventInvitations/${userId}`));
+}
+
 const eventInvitationRepository = {
   createInviteToEvent,
   acceptInvite,
-  recuseInvite
+  recuseInvite,
+  getNotifications,
+  getInvites
 }
 
 export default eventInvitationRepository

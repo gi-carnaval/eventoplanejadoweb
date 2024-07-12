@@ -7,20 +7,21 @@ export default function LoginPage() {
 
   const { user, logout } = useAuth()
   const navigate = useNavigate()
-  
-  function handleLogout(){
+
+  function handleLogout() {
     logout()
     notifyInfo("Saindo...", 1500)
     setTimeout(() => {
       navigate("/login")
     }, 1500)
-  } 
+  }
 
   return (
     <>
       {user ? (
         <>
           <button
+            title="Sair da conta"
             onClick={() => handleLogout()}
             className="flex flex-row items-center gap-4 right-8"
           >

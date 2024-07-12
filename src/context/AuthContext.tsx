@@ -46,7 +46,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
       setLoading(false)
     } catch (error) {
-      console.log(loading)
       console.error('Failed to fetch user data', error);
     }
   }

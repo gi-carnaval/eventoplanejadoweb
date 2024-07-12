@@ -4,6 +4,7 @@ import eventRepository from "@repositories/eventRepository"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { axiosErrorHandler } from "../../../utils/axiosErrorHandler"
+import { BackButton } from "@src/components/Atoms/BackButton"
 
 export default function SingleInvitedEvent() {
   const { eventId } = useParams()
@@ -37,6 +38,7 @@ export default function SingleInvitedEvent() {
 
   return (
     <>
+      <BackButton />
       {
         event ? (
           <pre>{JSON.stringify(event, undefined, 2)}</pre>

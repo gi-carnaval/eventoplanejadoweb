@@ -18,15 +18,14 @@ export default function OrganizedEventsTableRow({ event }: EventTableRowProps) {
 
   return (
     <div className="flex flex-row justify-between items-center border bg-[#19202a] border-gray-400/20 px-4 py-2 gap-4">
-      <div className="flex flex-col items-start gap-4">
+      <div className="flex flex-col items-start md:gap-4 gap-3">
         <div className="flex flex-col items-center">
           <OrganizedEventsTableRowEventName>{event.name}</OrganizedEventsTableRowEventName>
         </div>
         <div className="flex justify-start items-end">
           <OrganizedEventsTableRowEventStatus eventStatus={event.status} />
-
         </div>
-        <div className="flex justify-between items-center gap-8 text-sm text-zinc-400 text-left">
+        <div className="flex justify-between items-center gap-8 md:text-sm text-xs text-zinc-400 text-left">
           <span>Data: {eventDate}</span>
         </div>
       </div>

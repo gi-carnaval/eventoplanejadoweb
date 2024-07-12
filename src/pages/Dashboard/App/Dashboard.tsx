@@ -6,7 +6,7 @@ export default function HomeApp() {
   return (
     <>
       <DashboardMetrics />
-      <div className="flex gap-20 justify-between">
+      <div className="flex md:flex-row flex-col gap-20 justify-between">
         <OrganizedEventsTable />
         <InvitedEventsTable />
       </div>

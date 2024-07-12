@@ -7,13 +7,14 @@ import { SingleInvitedEvent } from "@pages/Dashboard/SingleInvitedEvent";
 import { SingleOrganizedEvent } from "@pages/Dashboard/SingleOrganizedEvent";
 import { Home } from "@pages/Home";
 import { Login } from "@pages/Login";
+import Notifications from "@src/pages/Dashboard/Notifications";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 export default function RoutesComponent() {
   return (
     <BrowserRouter>
       <Header />
-      <div className="flex flex-col w-full gap-4 overflow-auto h-dvh pt-32 pb-8 bottom-16 px-32 relative">
+      <div className="flex flex-col w-full gap-4 overflow-auto h-dvh pt-48 pb-8 bottom-16 md:px-32 px-10 relative">
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -40,6 +41,11 @@ export default function RoutesComponent() {
           <Route path="/join/:eventId" element={
             <RequireAuth>
               <JoinEvent />
+            </RequireAuth>
+          } />
+          <Route path="/notifications" element={
+            <RequireAuth>
+              <Notifications />
             </RequireAuth>
           } />
         </Routes>

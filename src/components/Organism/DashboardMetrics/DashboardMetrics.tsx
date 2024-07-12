@@ -1,5 +1,6 @@
 import { getRefreshToken } from "@lib/tokenService";
 import eventRepository from "@repositories/eventRepository";
+import { MetricCard } from "@src/components/Atoms/MetricCard";
 import { useEffect, useState } from "react";
 import { EventMetricsProps } from "src/types/event";
 
@@ -25,19 +26,10 @@ export default function DashboardMetrics() {
   }, [])
 
   return (
-    <div className="flex w-full justify-between">
-      <div className="flex flex-col gap-4 bg-[#19202a] border border-gray-400/20 p-5 w-[30%] rounded-lg">
-        <h3 className="text-2xl">Eventos criados</h3>
-        <span className="text-6xl">{`${metrics.createdEvents}`}</span>
-      </div>
-      <div className="flex flex-col gap-4 bg-[#19202a] border border-gray-400/20 p-5 w-[30%] rounded-lg">
-        <h3 className="text-2xl">Pessoas Convidadas</h3>
-        <span className="text-6xl">{`${metrics.invitedPeople}`}</span>
-      </div>
-      <div className="flex flex-col gap-4 bg-[#19202a] border border-gray-400/20 p-5 w-[30%] rounded-lg">
-        <h3 className="text-2xl">Eventos Convidados</h3>
-        <span className="text-6xl">{`${metrics.invitedEvents}`}</span>
-      </div>
+    <div className="flex flex-col md:flex-row gap-4 w-full justify-between">
+      <MetricCard cardTitle="Eventos Criados" metric={metrics.createdEvents} />
+      <MetricCard cardTitle="Pessoas Convidadas" metric={metrics.invitedPeople} />
+      <MetricCard cardTitle="Eventos Convidados" metric={metrics.invitedEvents} />
     </div>
   )
 }

@@ -4,8 +4,10 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { CreateEventProps } from "src/types/event"
 import { getRefreshToken } from "@lib/tokenService"
 import dayjs from "dayjs"
+import { BackButton } from "@src/components/Atoms/BackButton"
 
 export default function CreateEvent() {
+  
   const {
     register,
     handleSubmit,
@@ -37,6 +39,7 @@ export default function CreateEvent() {
 
   return (
     <>
+      <BackButton />
       <h1>Cadastrar Evento</h1>
       <div className="flex w-full">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-8">
@@ -87,7 +90,7 @@ export default function CreateEvent() {
               {errors.address && <span>{errors.address.message}</span>}
             </CreateEventFormInput>
           </div>
-          <div className="flex justify-between gap-20">
+          <div className="flex md:flex-row flex-col justify-between md:gap-20 gap-10">
             {/* Data de início do evento */}
             <CreateEventFormInput>
               <label className="text-lg font-bold" htmlFor="startDateTime">Data e hora de início</label>

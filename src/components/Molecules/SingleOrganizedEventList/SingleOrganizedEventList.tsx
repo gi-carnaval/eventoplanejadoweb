@@ -55,7 +55,7 @@ export default function SingleOrganizedEventList({ showGuestList, event, getUser
         event.EventInvitation && event.EventInvitation?.length > 0 ? (
           event.EventInvitation.map((invitation) => (
             <SingleOrganizedEventInvitationListItem
-              key={invitation.user.id}
+              key={invitation.id}
               user={invitation.user}
               onApprove={() => { approveInvite(invitation.id) }}
               onReject={() => { recuseInvite(invitation.id) }}
