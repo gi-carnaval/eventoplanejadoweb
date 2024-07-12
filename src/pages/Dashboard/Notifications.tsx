@@ -40,11 +40,19 @@ export default function Notifications() {
     }
   }, []);
 
-  if (!requests) {
-    <>
-      <BackButton />
-      <h1>Nenhuma Dolicitação de Convite</h1>
-    </>
+  if(requests === undefined) {
+    return (
+      <h1>Carregando...</h1>
+    )
+  }
+
+  if (requests?.length === 0) {
+    return (
+      <>
+        <BackButton />
+        <h1>Nenhuma Solicitação de Convite</h1>
+      </>
+    )
   }
 
   return (
