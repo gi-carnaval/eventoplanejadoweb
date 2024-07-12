@@ -7,8 +7,8 @@ export default function Home() {
 
   return (
     <div className="flex">
-      <div className="w-2/4 flex flex-col items-center gap-10">
-        <h1 className="text-5xl text-left font-bold leading-[125%]">Crie seus eventos e festas, convide quem você quiser e tenha o controle de tudo em suas mãos!</h1>
+      <div className="md:w-2/4 flex flex-col items-center gap-10">
+        <h1 className="md:text-5xl text-4xl text-left font-bold leading-[125%]">Crie seus eventos e festas, convide quem você quiser e tenha o controle de tudo em suas mãos!</h1>
         {user ? (
           <Link to="/app" className="w-full px-12 py-3 bg-yellow-500 rounded-lg hover:scale-[0.98] active:scale-[0.94] text-gray-700 hover:text-indigo-600 transition-all">Acessar Dashboard</Link>
         ) : (

@@ -31,9 +31,15 @@ export default function Header() {
         )}
         <div className={`flex  ${deviceType === "mobile" ? 'w-full justify-between' : ''} items-center gap-4`}>
           {deviceType === "mobile" && (
-            <button>
-              <RxHamburgerMenu className="text-xl" onClick={() => toggleSideBar()} />
-            </button>)
+            <>
+              <button>
+                <RxHamburgerMenu className="text-xl" onClick={() => toggleSideBar()} />
+              </button>
+              <Link to="/">
+                <img src={EventoPlanejadoLogo} alt="" />
+              </Link>
+            </>
+          )
           }
           <MobileMenu />
           {deviceType !== "mobile" && (
