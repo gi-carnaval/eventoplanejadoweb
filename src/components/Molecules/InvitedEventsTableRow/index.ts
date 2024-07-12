@@ -1,3 +1,3 @@
-import OrganizedEventsTableRow from "./OrganizedEventsTableRow";
+import { OrganizedEventsTableRow } from "../OrganizedEventsTableRow";
 
-export {OrganizedEventsTableRow}
+export { OrganizedEventsTableRow }

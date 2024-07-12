@@ -24,13 +24,15 @@ export default function InvitedEventsTable() {
   return (
     <div className="border w-full border-gray-400/20 bg-gray-400/20 backdrop-blur-sm rounded-lg overflow-hidden">
       <EventsTableTitle>Convites</EventsTableTitle>
-      {
-        events.map((event) => {
-          return(
-            <InvitedEventsTableRow key={event.id} event={event}/>
-          )
-        })
-      }
+      <div className="overflow-auto max-h-96">
+        {
+          events.map((event) => {
+            return (
+              <InvitedEventsTableRow key={event.id} event={event} />
+            )
+          })
+        }
+      </div>
     </div>
   )
 }

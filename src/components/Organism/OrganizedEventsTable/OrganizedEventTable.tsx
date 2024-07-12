@@ -23,7 +23,7 @@ export default function OrganizedEventsTable() {
   return (
     <div className="border w-full border-gray-400/20 bg-gray-400/20 backdrop-blur-sm rounded-lg overflow-hidden">
       <EventsTableTitle>Eventos Organizados</EventsTableTitle>
-      <div className="overflow-auto h-96">
+      <div className="overflow-auto max-h-96">
         {
           events.map((event) => {
             return (
