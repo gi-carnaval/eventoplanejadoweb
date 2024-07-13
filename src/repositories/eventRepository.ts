@@ -19,6 +19,10 @@ async function getInvitedEvent(userId: string, eventId: string){
   return (await api.get(`/invited-event/${userId}/${eventId}`));
 }
 
+async function getInvitedEventRequest(eventId: string) {
+  return( await api.get(`/invited-event-request/${eventId}`))
+}
+
 async function saveEvent(userId: string, eventData: CreateEventProps){
     return (await api.post(`/event`, {
     eventData,
@@ -32,7 +36,8 @@ const eventRepository = {
   saveEvent,
   getOrganizedEvent,
   getEventsMetrics,
-  getInvitedEvent
+  getInvitedEvent,
+  getInvitedEventRequest
 }
 
 export default eventRepository

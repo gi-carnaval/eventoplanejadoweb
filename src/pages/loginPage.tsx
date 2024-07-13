@@ -22,7 +22,7 @@ export default function LoginPage() {
         <>
           <button
             title="Sair da conta"
-            onClick={() => handleLogout()}
+            onClick={() => {handleLogout()}}
             className="flex flex-row items-center gap-4 right-8"
           >
             <img className="rounded-full w-8" src={user?.picture} alt="" />

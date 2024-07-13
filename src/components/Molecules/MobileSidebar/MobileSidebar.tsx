@@ -21,8 +21,11 @@ export default function TemporaryDrawer({ isOpen, onClose }: SidebarProps) {
         <nav className="flex flex-col w-full gap-2 items-start">
           <NavLink className="w-full pl-2" onClick={onClose} to="/app" currentPath="/app">Home</NavLink>
           <NavLink className="w-full pl-2" onClick={onClose} to="/eventos" currentPath="/eventos">Organizar evento</NavLink>
+          <NavLink className="w-full pl-2" onClick={onClose} to="/requests" currentPath="/requests">Minhas solicitações</NavLink>
         </nav>
-        <LoginPage />
+        <span onClick={onClose}>
+          <LoginPage/>
+        </span>
       </div>
     </div>
   );

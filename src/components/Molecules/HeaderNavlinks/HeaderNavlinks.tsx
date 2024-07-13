@@ -12,6 +12,7 @@ export default function HeaderNavlinks({ hasUser }: HeaderNavlinksProps) {
     <nav className="hidden md:flex gap-6">
       <NavLink to="/app" currentPath="/app">Home</NavLink>
       <NavLink to="/eventos" currentPath="/eventos">Organizar evento</NavLink>
+      <NavLink to="/requests" currentPath="/requests">Minhas solicitações</NavLink>
     </nav>
   )
 }

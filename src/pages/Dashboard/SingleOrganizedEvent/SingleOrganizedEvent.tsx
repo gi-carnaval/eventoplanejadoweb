@@ -12,6 +12,7 @@ import { SingleOrganizedEventToggleListButton } from "@components/Molecules/Sing
 import SingleOrganizedEventList from "@components/Molecules/SingleOrganizedEventList/SingleOrganizedEventList"
 import { getEventStatus } from "@lib/getEventStatus"
 import { BackButton } from "@src/components/Atoms/BackButton"
+import { Skeleton } from "@mui/material"
 
 export default function SingleOrganizedEvent() {
   const { eventId } = useParams()
@@ -68,7 +69,36 @@ export default function SingleOrganizedEvent() {
   }, [eventId]);
 
   if (!event) {
-    return <h1>Evento não encontrado</h1>
+    return (
+      <>
+        <div className="w-full flex flex-col items-center gap-20">
+          <div className="bg-slate-600/20 rounded-xl md:p-10 py-10 md:w-7/12 w-full flex flex-col justify-center items-center gap-8 backdrop-blur-sm border border-gray-400/20 text-lg">
+            <div className="flex flex-col gap-4 w-full md:px-20 px-5">
+              <Skeleton width="50%" height={40} />
+              <Skeleton width="100%" height={70} />
+              <div className="flex flex-col justify-around items-start gap-2">
+                <Skeleton width="100%" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-8 w-full md:px-20 px-5">
+              <div className="flex flex-col justify-around items-start gap-2">
+                <Skeleton width="100%" />
+              </div>
+              <div className="flex flex-col justify-around items-start gap-2">
+                <Skeleton width="100%" />
+              </div>
+              <div className="flex flex-col justify-around items-start gap-2">
+                <Skeleton width="100%" />
+              </div>
+              <div className="flex flex-col justify-around items-start gap-2">
+                <Skeleton width="100%" />
+              </div>
+              <Skeleton width="100%" />
+            </div>
+          </div>
+        </div>
+      </>
+    )
   }
 
   function copyText() {
@@ -115,13 +145,13 @@ export default function SingleOrganizedEvent() {
             {
               event.status !== "COMPLETED" ? (
                 <div className="flex flex-col justify-start items-start gap-2">
-                  <span className="text-sm text-zinc-500">Link de convite:</span>
+                  <span className="text-sm text-zinc-500">Link do convite:</span>
                   <span
                     onClick={() => copyText()}
                     className="text-sm underline cursor-pointer text-yellow-500 flex justify-center items-center gap-2 hover:text-yellow-600"
                     title="Clique para copiar o link">
                     {inviteLink}
-                    <MdContentCopy className="md:text-inherit text-4xl" />
+                    <MdContentCopy className="md:text-2xl text-4xl" />
                   </span>
                 </div>
               ) : null

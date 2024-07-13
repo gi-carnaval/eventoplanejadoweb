@@ -21,10 +21,10 @@ export default function LoginButton({className}: LoginButtonProps) {
     onSuccess: async (codeResponse) => {
       const accessToken = codeResponse.access_token
       login(accessToken)
-      notifySuccess("Entrando", 2000)
+      notifySuccess("Entrando", 3000)
       setTimeout(() => {
         navigate(routerHistory)
-      }, 2000)
+      }, 3000)
       return
     },
     onError: (error) => console.error('Login Failed:', error)
@@ -33,7 +33,7 @@ export default function LoginButton({className}: LoginButtonProps) {
   return (
     <>
       <button
-        className={cn(`flex flex-row justify-center items-center gap-2 p-6 right-8 w-4/5 bg-yellow-500 text-zinc-900 hover:text-indigo-950 border hover:scale-[0.98] hover:brightness-105 active:scale-[0.94] transition-all`, className)}
+        className={cn(`flex flex-row justify-center items-center gap-2 md:p-6 right-8 w-4/5 bg-yellow-500 text-zinc-900 hover:text-indigo-950 border hover:scale-[0.98] hover:brightness-105 active:scale-[0.94] transition-all`, className)}
         onClick={() => handleGoogleLogin()}
       >
         <FaGoogle className="text-2xl" />

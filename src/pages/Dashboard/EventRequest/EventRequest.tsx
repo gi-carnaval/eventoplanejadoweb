@@ -1,45 +1,52 @@
-import { Skeleton } from "@mui/material"
-import { BackButton } from "@src/components/Atoms/BackButton"
-import OrganizedEventsTableRowEventName from "@src/components/Atoms/OrganizedEventsTableRowEventName/OrganizedEventsTableRowEventName"
-import { notifyError } from "@src/lib/toastsNotifier"
-import { getRefreshToken } from "@src/lib/tokenService"
-import eventInvitationRepository from "@src/repositories/eventInvitationRepository"
-import { axiosErrorHandler } from "@src/utils/axiosErrorHandler"
-import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Skeleton } from "@mui/material";
+import { BackButton } from "@src/components/Atoms/BackButton";
+import OrganizedEventsTableRowEventName from "@src/components/Atoms/OrganizedEventsTableRowEventName/OrganizedEventsTableRowEventName";
+import { notifyError } from "@src/lib/toastsNotifier";
+import { getRefreshToken } from "@src/lib/tokenService";
+import { compare } from "@src/lib/utils";
+import eventInvitationRepository from "@src/repositories/eventInvitationRepository";
+import { axiosErrorHandler } from "@src/utils/axiosErrorHandler";
+import { useEffect, useState } from "react";
 
-interface Event {
-  id: string;
-  name: string;
-  _count: {
-    EventInvitation: number;
-  };
+const eventRequestStatus = {
+  PENDING: "Pendente",
+  APPROVED: "Aprovado",
+  REJECTED: "Recusado"
 }
 
-interface EventData {
-  event: Event;
+interface EventRequestEventProps {
+  name: string,
+  address: string,
+  startDateTime: Date
 }
 
-export default function Notifications() {
-  const [requests, setRequests] = useState<EventData[]>()
+export interface EventRequestProps {
+  id: string
+  event: EventRequestEventProps,
+  status: "REJECTED" | "PENDING" | "APPROVED",
+}
 
-  const getRequests = async (userId: string) => {
+export default function EventRequest() {
+  const [requests, setRequests] = useState<EventRequestProps[]>()
+
+  const getEventRequests = async (userId: string) => {
     try {
-      const result = await eventInvitationRepository.getInvites(userId)
-      setRequests(result.data)
+      const response = await eventInvitationRepository.getInvitesrequest(userId)
+      setRequests(response.data)
     } catch (error) {
       const errorMessage = axiosErrorHandler(error)
-      notifyError(errorMessage, 2500)
+      notifyError(errorMessage)
     }
   }
 
   useEffect(() => {
     const refresh_token = getRefreshToken()
+
     if (refresh_token) {
-      const { userId } = refresh_token
-      getRequests(userId)
+      getEventRequests(refresh_token.userId)
     }
-  }, []);
+
+  }, [])
 
   if (requests === undefined) {
     return (
@@ -72,16 +79,6 @@ export default function Notifications() {
       </>
     )
   }
-
-  if (requests?.length === 0) {
-    return (
-      <>
-        <BackButton />
-        <h1>Nenhuma Solicitação de Convite</h1>
-      </>
-    )
-  }
-
   return (
     <>
       <BackButton />
@@ -89,21 +86,16 @@ export default function Notifications() {
       <div className="border w-full border-gray-400/20 bg-gray-400/20 backdrop-blur-sm rounded-lg">
         <div className="overflow-auto max-h-96">
           {
-            requests && requests.map(({ event }) => {
+            requests && requests.sort(compare).map(({ event,id, status }) => {
               return (
-                <Link to={`/organizer/${event.id}`}>
-                  <div className="flex flex-row text-white justify-between items-center border bg-[#19202a] border-gray-400/20 px-6 py-4 gap-4">
-                    <div className="flex flex-col items-start md:gap-4 gap-3">
-                      <div className="flex flex-col items-center">
-                        <OrganizedEventsTableRowEventName>{event.name}</OrganizedEventsTableRowEventName>
-                      </div>
+                <div key={id} className={`flex flex-row ${status === "PENDING" ? 'text-yellow-500' : status === "APPROVED" ? 'text-green-500' : 'text-red-500'} justify-between items-center border border-gray-400/20 px-6 py-4 gap-4`}>
+                  <div className="flex flex-col items-start md:gap-4 gap-3">
+                    <div className="flex flex-col items-center">
+                      <OrganizedEventsTableRowEventName>{event.name}</OrganizedEventsTableRowEventName>
                     </div>
-                    <span className={`w-7 h-7 rounded-full text-lg text-white flex justify-center items-center bg-red-700`}>
-                      {event._count.EventInvitation}
-                      <span className="animate-ping absolute inline-flex h-6 w-6 rounded-full bg-red-500 opacity-30"></span>
-                    </span>
                   </div>
-                </Link>
+                  <span>{eventRequestStatus[status]}</span>
+                </div>
               )
             })
           }
