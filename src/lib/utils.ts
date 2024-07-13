@@ -44,5 +44,5 @@ export const compare = (a: EventRequestProps, b:EventRequestProps) => {
   // Se os status são iguais, compare as datas
   const dateA = new Date(a.event.startDateTime);
   const dateB = new Date(b.event.startDateTime);
-  return dateA - dateB;
+  return dateA.getTime() - dateB.getTime();
 };
