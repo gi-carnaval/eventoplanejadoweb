@@ -5,9 +5,16 @@ import { CreateEventProps } from "src/types/event"
 import { getRefreshToken } from "@lib/tokenService"
 import dayjs from "dayjs"
 import { BackButton } from "@src/components/Atoms/BackButton"
+import { useState } from "react"
+import { notifyError, notifySuccess } from "@src/lib/toastsNotifier"
+import { axiosErrorHandler } from "@src/utils/axiosErrorHandler"
+import { useNavigate } from "react-router-dom"
 
 export default function CreateEvent() {
-  
+  const [isSending, setIsSending] = useState<boolean>(false)
+
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
@@ -15,6 +22,8 @@ export default function CreateEvent() {
   } = useForm<CreateEventProps>()
 
   const onSubmit: SubmitHandler<CreateEventProps> = async (data) => {
+    setIsSending(true)
+
     const startDateTime = dayjs(data.startDateTime).toISOString()
     const endDateTime = dayjs(data.endDateTime).toISOString()
 
@@ -31,9 +40,15 @@ export default function CreateEvent() {
       const refreshToken = getRefreshToken()
       if (refreshToken) {
         await eventRepository.saveEvent(refreshToken?.userId, eventData)
+        notifySuccess("Evento criado com sucesso!", 1500)
+        setTimeout(() => {
+          navigate("/app")
+        }, 1500)
+
       }
     } catch (error) {
-      console.error(error)
+      const errorMessage = axiosErrorHandler(error)
+      notifyError(errorMessage, 2500)
     }
   }
 
@@ -117,7 +132,7 @@ export default function CreateEvent() {
             </CreateEventFormInput>
           </div >
           <div className="flex justify-center">
-            <input className="w-3/5 px-12 py-3 bg-yellow-500 rounded-lg hover:scale-[0.98] cursor-pointer active:scale-[0.94] text-gray-700 hover:text-indigo-600 transition-all" type="submit" value="Começar a Organizar" />
+            <input disabled={isSending} className="md:w-3/5 px-12 py-3 bg-yellow-500 rounded-lg hover:scale-[0.98] cursor-pointer active:scale-[0.94] text-gray-700 hover:text-indigo-600 transition-all disabled:brightness-50 disabled:cursor-not-allowed" type="submit" value="Começar a Organizar" />
           </div>
         </form >
       </div >

@@ -1,3 +1,4 @@
+import useDeviceType from "@src/hooks/useDeviceType";
 import { EventUser } from "src/types/event";
 
 interface OrganizedEventsTableRowGuestsProps {
@@ -14,11 +15,17 @@ export default function OrganizedEventsTableRowGuests({ guestsDatas }: Organized
   const displayedGuests = guests.slice(0, 3);
   const additionalGuestNumber = guestNumber - 3
 
+  const deviceType = useDeviceType()
+
   return (
-    <div className="flex justify-center items-center gap-3 py-2 -mb-6">
+    <div className="flex justify-center items-center gap-3 py-2 -mb-6 w-full">
       {guestNumber > 1 ? (
         <>
-          <span className="text-sm text-zinc-400">Convidados</span>
+        {
+          deviceType !== "mobile" && (
+            <span className="text-sm text-zinc-400">Convidados</span>
+          )
+        }
           <div className="flex">
             {
               displayedGuests.map((guest) => (

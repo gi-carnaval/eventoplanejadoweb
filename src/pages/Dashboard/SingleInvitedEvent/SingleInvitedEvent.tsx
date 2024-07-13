@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { axiosErrorHandler } from "../../../utils/axiosErrorHandler"
 import { BackButton } from "@src/components/Atoms/BackButton"
 import { Skeleton } from "@mui/material"
+import qrCode from "../../../assets/qrcode.png"
 import dayjs from "dayjs"
 
 interface Event {
@@ -102,10 +103,14 @@ export default function SingleInvitedEvent() {
               <span className="text-sm text-zinc-500">Local:</span>
               <address className="text-left">{event.address}</address>
               <div className="flex flex-col justify-around items-start gap-2">
-                <span className="text-sm text-zinc-500">Data de Início:</span>
+                <span className="text-sm text-zinc-500">Data:</span>
                 <span className="font-bold">{startDate} às {startTime}</span>
               </div>
             </div>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-2 w-full md:px-20 px-5">
+            <span className="text-sm text-zinc-500">Código de acesso</span>
+            <img src={qrCode} alt="qrcode" className="w-[40dvw]" />
           </div>
         </div>
       </div>

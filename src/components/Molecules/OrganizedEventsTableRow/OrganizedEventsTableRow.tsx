@@ -29,7 +29,7 @@ export default function OrganizedEventsTableRow({ event }: EventTableRowProps) {
           <span>Data: {eventDate}</span>
         </div>
       </div>
-      <div className="flex flex-col items-end">
+      <div className="flex flex-col items-end md:w-4/12">
         <Link to={`/organizer/${event.id}`} className="bg-stone-900 px-4 py-2 rounded-lg text-white font-normal hover:scale-[0.99] hover:brightness-110">Detalhes</Link>
         <OrganizedEventsTableRowGuests guestsDatas={guestsData} />
       </div>
