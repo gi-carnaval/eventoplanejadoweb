@@ -1,5 +1,5 @@
 import { useAuth } from "@hooks/useAuth"
-import { notifyError, notifySuccess } from "@lib/toastsNotifier"
+import { notifyError, notifyInfo, notifySuccess } from "@lib/toastsNotifier"
 import eventInvitationRepository from "@repositories/eventInvitationRepository"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
@@ -35,7 +35,10 @@ export default function JoinEvent() {
   const postInvitation = async (eventId: string, userId: string) => {
     try {
       const response = await eventInvitationRepository.createInviteToEvent(eventId, userId)
-      notifySuccess(response.data)
+      notifySuccess(response.data, 2000)
+      setTimeout(() => {
+        notifyInfo("Você poderá acompanhar suas solicitações através do menu 'Minhas Solicitações'")
+      }, 2000)
       navigate("/app")
     } catch (error) {
       const errorMessage = axiosErrorHandler(error)

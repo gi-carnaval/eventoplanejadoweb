@@ -26,7 +26,7 @@ export default function OrganizedEventsTableRowGuests({ guestsDatas }: Organized
             <span className="text-sm text-zinc-400">Convidados</span>
           )
         }
-          <div className="flex">
+          <div className="flex w-full">
             {
               displayedGuests.map((guest) => (
                 <img key={guest.user.name} className={`rounded-full w-6 h-6 border-2 border-[#19202a] ${displayedGuests.length > 1 ? '-ml-5' : ''}`} src={guest.user.picture} alt={guest.user.name} title={guest.user.name} />
