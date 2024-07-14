@@ -2,7 +2,7 @@ import { useAuth } from "@hooks/useAuth"
 import { notifyError, notifySuccess } from "@lib/toastsNotifier"
 import eventInvitationRepository from "@repositories/eventInvitationRepository"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { axiosErrorHandler } from "../../../utils/axiosErrorHandler"
 import eventRepository from "@src/repositories/eventRepository"
 import { Skeleton } from "@mui/material"
@@ -28,6 +28,7 @@ export default function JoinEvent() {
   const [event, setEvent] = useState<JoinEventProps>()
   const { eventId } = useParams()
   const { user } = useAuth()
+  const navigate = useNavigate()
 
   const [hasSentInvitation, setHasSentInvitation] = useState<boolean>(false);
 
@@ -35,6 +36,7 @@ export default function JoinEvent() {
     try {
       const response = await eventInvitationRepository.createInviteToEvent(eventId, userId)
       notifySuccess(response.data)
+      navigate("/app")
     } catch (error) {
       const errorMessage = axiosErrorHandler(error)
       notifyError(errorMessage)

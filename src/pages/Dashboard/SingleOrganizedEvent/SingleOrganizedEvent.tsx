@@ -144,13 +144,15 @@ export default function SingleOrganizedEvent() {
             </div>
             {
               event.status !== "COMPLETED" ? (
-                <div className="flex flex-col justify-start items-start gap-2">
+                <div className="flex flex-col justify-start items-start gap-2 w-full h-fit">
                   <span className="text-sm text-zinc-500">Link do convite:</span>
                   <span
                     onClick={() => copyText()}
-                    className="text-sm underline cursor-pointer text-yellow-500 flex justify-center items-center gap-2 hover:text-yellow-600"
+                    className="w-full text-left text-wrap text-sm underline cursor-pointer text-yellow-500 flex justify-center items-center gap-2 hover:text-yellow-600"
                     title="Clique para copiar o link">
-                    {inviteLink}
+                    <p className="w-full text-ellipsis overflow-hidden">
+                      {inviteLink}
+                    </p>
                     <MdContentCopy className="md:text-2xl text-4xl" />
                   </span>
                 </div>
@@ -176,7 +178,7 @@ export default function SingleOrganizedEvent() {
           </div>
           <SingleOrganizedEventList showGuestList={showGuestList} event={event} getUserRole={getUserRole} />
         </div>
-      </div>
+      </div >
     </>
   )
 }
