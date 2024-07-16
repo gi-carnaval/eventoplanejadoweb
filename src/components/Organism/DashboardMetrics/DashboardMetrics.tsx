@@ -21,7 +21,7 @@ export default function DashboardMetrics({ metrics }: DashboardMetricsProps) {
     <div className="flex flex-col md:flex-row gap-4 w-full justify-between">
       <MetricCard cardTitle="Eventos Criados" metric={metrics.createdEvents} />
       <MetricCard cardTitle="Pessoas Convidadas" metric={metrics.invitedPeople} />
-      <MetricCard cardTitle="Eventos Convidados" metric={metrics.invitedEvents} />
+      <MetricCard cardTitle="Eventos Convidados" metric={metrics.invitedEventsCount} />
     </div>
   )
 }

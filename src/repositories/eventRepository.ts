@@ -2,7 +2,7 @@ import { api } from "@lib/axios";
 import { CreateEventProps } from "src/types/event";
 
 async function getEventByOrganizer(userId: string){
-  return (await api.get(`/organized-events/${userId}`));
+  return (await api.get(`/events/${userId}`));
 }
 
 async function getAllEventsByUserId(userId: string){

@@ -2,20 +2,32 @@ import { DashboardMetrics } from "@components/Organism/DashboardMetrics"
 import InvitedEventsTable from "@components/Organism/InvitedEventsTable/InvitedEventsTable"
 import OrganizedEventsTable from "@components/Organism/OrganizedEventsTable/OrganizedEventTable"
 import { Skeleton } from "@mui/material"
+import { notifyError } from "@src/lib/toastsNotifier"
 import { getRefreshToken } from "@src/lib/tokenService"
 import eventRepository from "@src/repositories/eventRepository"
 import { EventMetricsProps, IEvent } from "@src/types/event"
+import { axiosErrorHandler } from "@src/utils/axiosErrorHandler"
 import { useEffect, useState } from "react"
 
 export default function HomeApp() {
-
-  const [events, setEvents] = useState<IEvent[]>([])
-  const [metrics, setMetrics] = useState<EventMetricsProps>()
+  const [organizedEvents, setOrganizedEvents] = useState<IEvent[]>([])
+  const [invitedEvents, setInvitedEvents] = useState<IEvent[]>([])
+  const [metrics, setMetrics] = useState<EventMetricsProps>({
+    createdEvents: 0,
+    invitedEventsCount: 0,
+    invitedPeople: 0
+  })
 
   const getEvents = async (userId: string) => {
-    const result = await eventRepository.getEventByOrganizer(userId)
-    setEvents(result.data.events)
-    setMetrics(result.data.metrics)
+    try {
+      const result = await eventRepository.getEventByOrganizer(userId)
+      setOrganizedEvents(result.data.organizedEvents)
+      setInvitedEvents(result.data.invitedEvents)
+      setMetrics(result.data.metrics)
+    } catch (error) {
+      const errorMessage = axiosErrorHandler(error)
+      notifyError(errorMessage, 2500)
+    }
   }
 
   useEffect(() => {
@@ -26,7 +38,7 @@ export default function HomeApp() {
     }
   }, [])
 
-  if (!metrics || !events) {
+  if (!metrics || !organizedEvents) {
     return (
       <>
         <div className="flex flex-col md:flex-row gap-4 w-full justify-between">
@@ -49,14 +61,12 @@ export default function HomeApp() {
       </>
     )
   }
-
   return (
     <>
-
       <DashboardMetrics metrics={metrics} />
       <div className="flex md:flex-row flex-col gap-20 justify-between">
-        <OrganizedEventsTable events={events} />
-        <InvitedEventsTable />
+        <OrganizedEventsTable events={organizedEvents} />
+        <InvitedEventsTable events={invitedEvents} />
       </div>
     </ >
   )

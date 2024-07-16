@@ -70,5 +70,5 @@ export interface CreateEventProps {
 export interface EventMetricsProps {
   createdEvents: number
 	invitedPeople: number
-	invitedEvents: number
+	invitedEventsCount: number
 }

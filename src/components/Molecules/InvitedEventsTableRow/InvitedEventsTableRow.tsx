@@ -1,8 +1,8 @@
 import OrganizedEventsTableRowEventName from "@components/Atoms/OrganizedEventsTableRowEventName/OrganizedEventsTableRowEventName"
 import dayjs from "dayjs"
-import { IEvent } from "src/types/event"
 import OrganizedEventsTableRowEventStatus from "@components/Atoms/OrganizedEventsTableRowEventStatus/OrganizedEventsTableRowEventStatus"
 import { Link } from "react-router-dom"
+import { IEvent } from "@src/types/event"
 
 interface InvitedEventsTableRowProps {
   event: IEvent
