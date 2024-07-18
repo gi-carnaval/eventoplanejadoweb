@@ -12,11 +12,7 @@ import { useEffect, useState } from "react"
 export default function HomeApp() {
   const [organizedEvents, setOrganizedEvents] = useState<IEvent[]>([])
   const [invitedEvents, setInvitedEvents] = useState<IEvent[]>([])
-  const [metrics, setMetrics] = useState<EventMetricsProps>({
-    createdEvents: 0,
-    invitedEventsCount: 0,
-    invitedPeople: 0
-  })
+  const [metrics, setMetrics] = useState<EventMetricsProps>()
 
   const getEvents = async (userId: string) => {
     try {
