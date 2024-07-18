@@ -1,4 +1,5 @@
 import { EventRequestProps } from "@src/pages/Dashboard/EventRequest/EventRequest"
+import { IEvent } from "@src/types/event"
 import { ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -21,28 +22,54 @@ const roleEnum: { [index: string]: string } = {
   PARTICIPANT: "Convidado",
 }
 
+export function getEventUserStatus(status: string) {
+  return eventUserStatusEnum[status]
+}
+
+const eventUserStatusEnum: { [index: string]: string } = {
+  ACCEPTED: "Aceito",
+  CHECKED_IN: "Presente",
+  NO_SHOW: "Ausente",
+  CANCELLED: "Cancelado"
+}
+
 export function getUserRole(status: string) {
   return roleEnum[status]
 }
 
-const statusOrder = {
+const inviteEventRequestStatusOrder = {
   PENDING: 1,
   APPROVED: 2,
   REJECTED: 3
 };
+const eventStatusOrder = {
+  ONGOING: 1,
+  SCHEDULED: 2,
+  COMPLETED: 3
+};
 
-// Função de comparação personalizada
-export const compare = (a: EventRequestProps, b:EventRequestProps) => {
-  // Compare os status primeiro
-  if (statusOrder[a.status] < statusOrder[b.status]) {
+export const inviteEventRequestCompare = (a: EventRequestProps, b: EventRequestProps) => {
+  if (inviteEventRequestStatusOrder[a.status] < inviteEventRequestStatusOrder[b.status]) {
     return -1;
   }
-  if (statusOrder[a.status] > statusOrder[b.status]) {
+  if (inviteEventRequestStatusOrder[a.status] > inviteEventRequestStatusOrder[b.status]) {
     return 1;
   }
 
-  // Se os status são iguais, compare as datas
   const dateA = new Date(a.event.startDateTime);
   const dateB = new Date(b.event.startDateTime);
+  return dateA.getTime() - dateB.getTime();
+};
+
+export const eventCompare = (a: IEvent, b: IEvent) => {
+  if (eventStatusOrder[a.status] < eventStatusOrder[b.status]) {
+    return -1;
+  }
+  if (eventStatusOrder[a.status] > eventStatusOrder[b.status]) {
+    return 1;
+  }
+
+  const dateA = new Date(a.startDateTime);
+  const dateB = new Date(b.startDateTime);
   return dateA.getTime() - dateB.getTime();
 };

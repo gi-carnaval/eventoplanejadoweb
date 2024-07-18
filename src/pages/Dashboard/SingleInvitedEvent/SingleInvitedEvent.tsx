@@ -9,7 +9,12 @@ import { Skeleton } from "@mui/material"
 import dayjs from "dayjs"
 import QRCode from "react-qr-code"
 
+interface EventUserProps {
+  id: string
+}
+
 interface Event {
+  EventUser: EventUserProps[];
   address: string;
   createdAt: string;
   description: string;
@@ -113,7 +118,7 @@ export default function SingleInvitedEvent() {
           <div className="flex flex-col items-center justify-center gap-2 w-full md:px-20 px-5">
             <span className="text-sm text-zinc-500">Código de acesso</span>
             <div style={{ background: 'white', padding: '4px' }}>
-              <QRCode value={event.id} className="w-[40dvw] h-full" />
+              <QRCode value={event.EventUser[0].id} className="w-[40dvw] h-full" />
             </div>
           </div>
         </div>

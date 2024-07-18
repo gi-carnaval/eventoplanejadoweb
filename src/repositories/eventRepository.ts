@@ -30,6 +30,13 @@ async function saveEvent(userId: string, eventData: CreateEventProps){
   }));
 }
 
+async function validateGuestInvite(eventId: string, eventUserId: string, organizerId: string){
+  return (await api.put(`/event/${eventId}`, {
+  eventUserId,
+  organizerId
+}));
+}
+
 const eventRepository = {
   getEventByOrganizer,
   getAllEventsByUserId,
@@ -37,7 +44,8 @@ const eventRepository = {
   getOrganizedEvent,
   getEventsMetrics,
   getInvitedEvent,
-  getInvitedEventRequest
+  getInvitedEventRequest,
+  validateGuestInvite
 }
 
 export default eventRepository

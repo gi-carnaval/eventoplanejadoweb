@@ -1,5 +1,6 @@
 import { EventsTableTitle } from "@components/Atoms/OrganizedEventsTableTitle"
 import InvitedEventsTableRow from "@components/Molecules/InvitedEventsTableRow/InvitedEventsTableRow"
+import { eventCompare } from "@src/lib/utils"
 import { IEvent } from "@src/types/event"
 
 interface InvitedEventsTableProps {
@@ -12,7 +13,7 @@ export default function InvitedEventsTable({ events }: InvitedEventsTableProps) 
       <EventsTableTitle>Convites</EventsTableTitle>
       <div className="overflow-auto max-h-96">
         {
-          events.map((event) => {
+          events.sort(eventCompare).map((event) => {
             return (
               <InvitedEventsTableRow key={event.id} event={event} />
             )

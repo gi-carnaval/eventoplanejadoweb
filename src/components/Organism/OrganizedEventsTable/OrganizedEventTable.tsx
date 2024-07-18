@@ -1,6 +1,7 @@
 import { IEvent } from "src/types/event"
 import { OrganizedEventsTableRow } from "@components/Molecules/OrganizedEventsTableRow"
 import { EventsTableTitle } from "@components/Atoms/OrganizedEventsTableTitle"
+import { eventCompare } from "@src/lib/utils"
 
 interface OrganizedEventsTableProps {
   events: IEvent[]
@@ -13,7 +14,7 @@ export default function OrganizedEventsTable({ events }: OrganizedEventsTablePro
       <EventsTableTitle>Eventos Organizados</EventsTableTitle>
       <div className="overflow-auto max-h-96">
         {
-          events.map((event) => {
+          events.sort(eventCompare).map((event) => {
             return (
               <OrganizedEventsTableRow key={event.id} event={event} />
             )

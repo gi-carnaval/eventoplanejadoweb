@@ -10,7 +10,7 @@ export default function BackButton({route = "/app"}: BackButtonProps) {
   return (
     <button
       onClick={() => navigate(route)}
-      className="relative bg-transparent rounded-lg w-32 -left-5 flex justify-center items-center gap-4"
+      className="relative bg-transparent rounded-lg w-32 left-5 flex justify-center items-center gap-4"
     >
       <IoReturnDownBack className="text-2xl" />
       voltar

@@ -3,7 +3,7 @@ import { BackButton } from "@src/components/Atoms/BackButton";
 import OrganizedEventsTableRowEventName from "@src/components/Atoms/OrganizedEventsTableRowEventName/OrganizedEventsTableRowEventName";
 import { notifyError } from "@src/lib/toastsNotifier";
 import { getRefreshToken } from "@src/lib/tokenService";
-import { compare } from "@src/lib/utils";
+import { inviteEventRequestCompare } from "@src/lib/utils";
 import eventInvitationRepository from "@src/repositories/eventInvitationRepository";
 import { axiosErrorHandler } from "@src/utils/axiosErrorHandler";
 import { useEffect, useState } from "react";
@@ -86,7 +86,7 @@ export default function EventRequest() {
       <div className="border w-full border-gray-400/20 bg-gray-400/20 backdrop-blur-sm rounded-lg">
         <div className="overflow-auto max-h-96">
           {
-            requests && requests.sort(compare).map(({ event,id, status }) => {
+            requests && requests.sort(inviteEventRequestCompare).map(({ event,id, status }) => {
               return (
                 <div key={id} className={`flex flex-row ${status === "PENDING" ? 'text-yellow-500' : status === "APPROVED" ? 'text-green-500' : 'text-red-500'} justify-between items-center border border-gray-400/20 px-6 py-4 gap-4`}>
                   <div className="flex flex-col items-start md:gap-4 gap-3">

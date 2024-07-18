@@ -17,6 +17,7 @@ interface ISingleOrganizedEventUser {
 
 interface EventUser {
   role: string;
+  eventUserStatus: "ACCEPTED" | "CHECKED_IN" | "NO_SHOW" | "CANCELLED";
   user: User;
 }
 

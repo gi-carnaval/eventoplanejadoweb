@@ -48,6 +48,7 @@ export default function SingleOrganizedEventList({ showGuestList, event, getUser
             key={guest.user.name}
             user={guest.user}
             role={guest.role}
+            eventUserStatus={guest.eventUserStatus}
             getUserRole={getUserRole}
           />
         ))
