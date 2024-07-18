@@ -6,8 +6,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import { axiosErrorHandler } from "../../../utils/axiosErrorHandler"
 import { BackButton } from "@src/components/Atoms/BackButton"
 import { Skeleton } from "@mui/material"
-import qrCode from "../../../assets/qrcode.png"
 import dayjs from "dayjs"
+import QRCode from "react-qr-code"
 
 interface Event {
   address: string;
@@ -86,6 +86,8 @@ export default function SingleInvitedEvent() {
   const startDate = dayjs(event.startDateTime).format("DD/MM/YYYY")
   const startTime = dayjs(event.startDateTime).format("HH:mm")
 
+  console.log("Evento Invited: ", event)
+
   return (
     <>
       <BackButton />
@@ -110,7 +112,9 @@ export default function SingleInvitedEvent() {
           </div>
           <div className="flex flex-col items-center justify-center gap-2 w-full md:px-20 px-5">
             <span className="text-sm text-zinc-500">Código de acesso</span>
-            <img src={qrCode} alt="qrcode" className="w-[40dvw]" />
+            <div style={{ background: 'white', padding: '4px' }}>
+              <QRCode value={event.id} className="w-[40dvw] h-full" />
+            </div>
           </div>
         </div>
       </div>
