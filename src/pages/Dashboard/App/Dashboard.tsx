@@ -68,6 +68,6 @@ export default function HomeApp() {
         <OrganizedEventsTable events={organizedEvents} />
         <InvitedEventsTable events={invitedEvents} />
       </div>
-    </ >
+    </>
   )
 }

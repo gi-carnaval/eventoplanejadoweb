@@ -7,7 +7,7 @@ import { axiosErrorHandler } from "../../../utils/axiosErrorHandler"
 import { ISingleOrganizedEvent } from "src/types/event"
 import dayjs from "dayjs"
 import { getUserRole } from "@lib/utils"
-import { MdContentCopy } from "react-icons/md"
+import { MdContentCopy, MdOutlineQrCodeScanner } from "react-icons/md"
 import { SingleOrganizedEventToggleListButton } from "@components/Molecules/SingleOrganizedEventToggleListButton"
 import SingleOrganizedEventList from "@components/Molecules/SingleOrganizedEventList/SingleOrganizedEventList"
 import { getEventStatus } from "@lib/getEventStatus"
@@ -41,9 +41,6 @@ export default function SingleOrganizedEvent() {
 
     setSocket(ws);
 
-    // return () => {
-    //   ws.close();
-    // };
   }, [eventId]);
 
   const getEvent = async (userId: string, eventId: string) => {
@@ -116,6 +113,18 @@ export default function SingleOrganizedEvent() {
     <>
       <BackButton />
       <div className="w-full flex flex-col items-center gap-20">
+        {
+          event.status === "ONGOING" && (
+            <button
+              onClick={() => navigate(`/validation/${event.id}`)}
+              className="rounded-lg md:w-5/12 w-full right-5 top-5 flex justify-center items-center gap-4 -mb-12 py-4 bg-yellow-500 hover:scale-[0.98] active:scale-[0.94] text-gray-700 hover:text-indigo-600 transition-all"
+            >
+              <MdOutlineQrCodeScanner className="text-2xl" />
+              Validar Convidados
+            </button>
+
+          )
+        }
         <div className="bg-slate-600/20 rounded-xl md:p-10 py-10 md:w-7/12 w-full flex flex-col justify-center items-center gap-8 backdrop-blur-sm border border-gray-400/20 text-lg">
           <div className="flex flex-col gap-4 w-full md:px-20 px-5">
             <span className={`${getEventStatus(event.status) == "Encerrado" ? 'text-red-800' : getEventStatus(event.status) == "Agendado" ? 'text-green-800' : 'text-blue-800'}`}>Evento {getEventStatus(event.status)}</span>
@@ -150,7 +159,7 @@ export default function SingleOrganizedEvent() {
                     onClick={() => copyText()}
                     className="w-full text-left text-wrap text-sm underline cursor-pointer text-yellow-500 flex justify-center items-center gap-2 hover:text-yellow-600"
                     title="Clique para copiar o link">
-                    <p className="w-full text-ellipsis overflow-hidden">
+                    <p title={inviteLink} className="truncate">
                       {inviteLink}
                     </p>
                     <MdContentCopy className="md:text-2xl text-4xl" />
