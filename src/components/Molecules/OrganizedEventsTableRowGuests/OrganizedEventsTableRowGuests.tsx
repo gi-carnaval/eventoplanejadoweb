@@ -18,7 +18,7 @@ export default function OrganizedEventsTableRowGuests({ guestsDatas }: Organized
   const deviceType = useDeviceType()
 
   return (
-    <div className="flex justify-center items-center gap-3 py-2 -mb-6 w-full">
+    <div className="flex justify-center items-center gap-3 py-2 -mb-4 w-full">
       {guestNumber > 1 ? (
         <>
         {
@@ -29,7 +29,7 @@ export default function OrganizedEventsTableRowGuests({ guestsDatas }: Organized
           <div className="flex w-full">
             {
               displayedGuests.map((guest) => (
-                <img key={guest.user.name} className={`rounded-full w-6 h-6 border-2 border-[#19202a] ${displayedGuests.length > 1 ? '-ml-5' : ''}`} src={guest.user.picture} alt={guest.user.name} title={guest.user.name} />
+                <img key={guest.user.name} className={`rounded-full w-6 h-6 border-2 border-[#19202a] ${displayedGuests.length > 1 ? '-ml-3' : ''}`} src={guest.user.picture} alt={guest.user.name} title={guest.user.name} />
               ))
             }
             {
