@@ -111,9 +111,9 @@ export default function JoinEvent() {
     <>
       <Helmet>
         <title>{`Entrar no evento ${event.name}`}</title>
-        <meta name="og:title" content={`Entrar no evento ${event.name}`} />
-        <meta name="description" content={`Participe do evento ${event.name} e tenha acesso a todas as informações. Solicite sua entrada e fique por dentro dos detalhes do evento.`} />
-        <meta name="og:description" content={`Participe do evento ${event.name} e tenha acesso a todas as informações. Solicite sua entrada e fique por dentro dos detalhes do evento.`} />
+        <meta property="og:title" content={`Entrar no evento ${event.name}`} />
+        <meta property="description" content={`Participe do evento ${event.name} e tenha acesso a todas as informações. Solicite sua entrada e fique por dentro dos detalhes do evento.`} />
+        <meta property="og:description" content={`Participe do evento ${event.name} e tenha acesso a todas as informações. Solicite sua entrada e fique por dentro dos detalhes do evento.`} />
       </Helmet>
       <BackButton />
       <div className="w-full flex flex-col items-center gap-20">
