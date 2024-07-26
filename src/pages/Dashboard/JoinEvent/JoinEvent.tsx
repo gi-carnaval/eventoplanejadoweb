@@ -8,6 +8,7 @@ import eventRepository from "@src/repositories/eventRepository"
 import { Skeleton } from "@mui/material"
 import dayjs from "dayjs"
 import { BackButton } from "@src/components/Atoms/BackButton"
+import { Helmet } from "react-helmet-async"
 
 interface EventUserJoinEventProps {
   user: {
@@ -108,6 +109,12 @@ export default function JoinEvent() {
 
   return (
     <>
+      <Helmet>
+        <title>{`Entrar no evento ${event.name}`}</title>
+        <meta name="og:title" content={`Entrar no evento ${event.name}`} />
+        <meta name="description" content={`Participe do evento ${event.name} e tenha acesso a todas as informações. Solicite sua entrada e fique por dentro dos detalhes do evento.`} />
+        <meta name="og:description" content={`Participe do evento ${event.name} e tenha acesso a todas as informações. Solicite sua entrada e fique por dentro dos detalhes do evento.`} />
+      </Helmet>
       <BackButton />
       <div className="w-full flex flex-col items-center gap-20">
         <div className="bg-slate-600/20 rounded-xl md:p-10 py-10 md:w-7/12 w-full flex flex-col justify-center items-center gap-8 backdrop-blur-sm border border-gray-400/20 text-lg">
